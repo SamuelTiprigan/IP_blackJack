@@ -102,7 +102,6 @@ void MainWindow::on_pushButton_4_clicked()
             ui->loginGroup->setVisible(false);
             ui->matchBox->setVisible(true);
 
-
         }
     }
 }

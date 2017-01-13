@@ -13,10 +13,7 @@
 #include <fstream>
 #include "QMessageBox"
 
-
 using namespace std;
-
-
 
 struct Player
 {
@@ -27,8 +24,6 @@ struct Player
     int money;
     int score;
 };
-
-
 
 void printPlayerDetails(struct Player *player);
 
