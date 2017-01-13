@@ -13,8 +13,13 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    Functions.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    Functions.h
 
 FORMS    += mainwindow.ui
+
+#enable console
+CONFIG += console
