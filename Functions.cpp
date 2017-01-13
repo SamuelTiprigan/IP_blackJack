@@ -1,5 +1,8 @@
 #include"Functions.h"
 
+
+using namespace std;
+
 bool validateRegisterInput(std::string name, std::string email, std::string age, std::string password,std::string money)
 {
     if(!name.empty() && !email.empty() && !age.empty() && !password.empty())
@@ -41,6 +44,7 @@ void registerPlayer(string name, string email, string age, string password, stri
     newPlayer.age = ageValue;
     newPlayer.password = password;
     newPlayer.money=moneyValue;
+    newPlayer.score=0;
 
     printPlayerDetails(&newPlayer);
     writeIntoFile(&newPlayer);
@@ -49,11 +53,12 @@ void registerPlayer(string name, string email, string age, string password, stri
 
 void printPlayerDetails(struct Player *player)
 {
-    cout<< "\nName " << player->name << " |Email "<<player->email<< " |Age " << player->age << "|Money " <<player->money<<endl;
+    cout<< "\nName " << player->name << " |Email "<<player->email<< " |Age " << player->age << "|Money " <<player->money << " | " << player->score<<endl;
 }
 
 void writeIntoFile(struct Player *player)
 {
+    int initialScore =0;
     QMessageBox messageBox;
 
     std::stringstream sAge;
@@ -62,17 +67,114 @@ void writeIntoFile(struct Player *player)
     std::stringstream sMoney;
     sMoney << player->money;
 
-    std::string lineToWrite = player->name + "|" + player->email +"|"+ sAge.str()+"|"+player->password+"|"+sMoney.str()+"\n";
+    std::stringstream sScore;
+    sScore << initialScore;
+
+    std::string lineToWrite = player->name + "|" + player->email +"|"+ sAge.str()+"|"+player->password+"|"+sMoney.str() + "|" + sScore.str() +"\n";
     ofstream myfile ("players.txt");
 
-       if (myfile.is_open())
-       {
+    if (myfile.is_open())
+    {
         myfile << lineToWrite;
         myfile.close();
-       }
-       else {
+    }
+    else {
         messageBox.setText("Can't open file");
         messageBox.exec();
         cout << "Can't open file" <<endl;
+    }
+}
+
+bool findUser(string email)
+{
+    QMessageBox messageBox;
+    string filename = "players.txt";
+
+    ifstream dafi(filename.c_str());
+
+    if (dafi)
+    {
+        string search;
+        string line;
+
+        search = email;
+
+        while (getline(dafi, line))
+        {
+            if (line.find(search) != std::string::npos)
+            {
+                return true;
+            }
         }
+    }
+    else
+    {
+        messageBox.setText("Can't open file");
+        messageBox.exec();
+        cerr << "Cannot open file " << filename << endl;
+        return -1;
+    }
+
+    return false;
+}
+
+std::string loginPlayer(string email, string password)
+{
+    QMessageBox messageBox;
+
+    char *name;
+    char *emailLogin;
+    char *age;
+    char *passLogin;
+    char *money;
+    char *score;
+
+    string filename = "players.txt";
+    ifstream dafi(filename.c_str());
+    if (dafi)
+    {
+        string search;
+        string line;
+        search = email;
+        while (getline(dafi, line))
+        {
+            if (line.find(search) != std::string::npos)
+            {
+                std::cout<<line<<endl;
+
+                char helpingArray[1024];
+                strcpy(helpingArray, line.c_str());
+
+                name = strtok(helpingArray,"|");
+                emailLogin = strtok(NULL,"|");
+                age= strtok(NULL,"|");
+                passLogin = strtok(NULL,"|");
+                money= strtok(NULL,"|");
+                score =strtok(NULL,"|");
+
+
+                cout<<string(emailLogin)<<endl;
+                cout<<string(password)<<endl;
+
+                if(string(emailLogin) == email && passLogin == password)
+                {
+                    cout<<"adevarat"<<endl;
+                    return email;
+                }
+            }
+            else
+            {
+                messageBox.setText(" User not found in the database ! \nPlease register!");
+                messageBox.exec();
+            }
+        }
+    }
+    else
+    {
+        messageBox.setText("Can't open file");
+        messageBox.exec();
+        cerr << "Cannot open file " << filename << endl;
+    }
+
+    return "";
 }
