@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include"Functions.h"
 #include"editprofile.h"
-#include"BlackJack.h"
+#include"BlackJack.cpp"
 
 static int countLoggedUsers =0;
 
@@ -131,5 +131,15 @@ void MainWindow::on_pushButton_6_clicked()
 //play single
 void MainWindow::on_pushButton_10_clicked()
 {
+    struct Deck deck;
+    deck = InitializeDeck();
+    std::cout<<deck[2]<<endl;
+
+    struct Card card;
+    card = GiveMeACard(deck);
+
+
+    cout<<"Am gasit" << PrintOnScreenCard(card)<<endl;
+
 
 }

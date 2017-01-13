@@ -20,8 +20,7 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h \
     Functions.h \
-    editprofile.h \
-    BlackJack.h
+    editprofile.h
 
 FORMS    += mainwindow.ui \
     editprofile.ui
