@@ -85,7 +85,7 @@ void writeIntoFile(struct Player *player)
     }
 }
 
-bool findUser(string email)
+bool userExists(string email)
 {
     QMessageBox messageBox;
     string filename = "players.txt";
@@ -178,3 +178,113 @@ std::string loginPlayer(string email, string password)
 
     return "";
 }
+
+std::string returnUser(string email)
+{
+    QMessageBox messageBox;
+
+    string filename = "players.txt";
+    ifstream dafi(filename.c_str());
+    if (dafi)
+    {
+        string search;
+        string line;
+        search = email;
+        while (getline(dafi, line))
+        {
+            if (line.find(search) != std::string::npos)
+            {
+                return line;
+            }
+            else
+            {
+                messageBox.setText(" User not found in the database ! \nPlease register!");
+                messageBox.exec();
+            }
+        }
+    }
+    else
+    {
+        messageBox.setText("Can't open file");
+        messageBox.exec();
+        cerr << "Cannot open file " << filename << endl;
+    }
+
+    return "";
+}
+
+int checkPointsUser(string email)
+{
+    QMessageBox messageBox;
+
+    char *name;
+    char *emailLogin;
+    char *age;
+    char *passLogin;
+    char *money;
+    char *score;
+
+    string filename = "players.txt";
+    ifstream dafi(filename.c_str());
+    if (dafi)
+    {
+        string search;
+        string line;
+        search = email;
+        while (getline(dafi, line))
+        {
+            if (line.find(search) != std::string::npos)
+            {
+                std::cout<<line<<endl;
+
+                char helpingArray[1024];
+                strcpy(helpingArray, line.c_str());
+
+                name = strtok(helpingArray,"|");
+                emailLogin = strtok(NULL,"|");
+                age= strtok(NULL,"|");
+                passLogin = strtok(NULL,"|");
+                money= strtok(NULL,"|");
+                score =strtok(NULL,"|");
+
+                return atoi(score);
+            }
+            else
+            {
+                messageBox.setText(" User not found in the database ! \nPlease register!");
+                messageBox.exec();
+            }
+        }
+    }
+    else
+    {
+        messageBox.setText("Can't open file");
+        messageBox.exec();
+        cerr << "Cannot open file " << filename << endl;
+    }
+
+    return 0;
+}
+
+
+void replaceLineInFile(string strReplace, string strNew)
+{
+       ifstream filein("players.txt");
+       ofstream fileout("temp.txt");
+       if(!filein || !fileout)
+       {
+           cout << "Error opening files!" << endl;
+           return;
+       }
+       string strTemp;
+         while(filein >> strTemp)//it will check line from test to strTemp string
+       {
+           if(strTemp == strReplace)//if your word found then replace
+           {
+               strTemp = strNew;
+               //found = true;
+           }
+           strTemp += "\n";
+           fileout << strTemp;//output everything to fileout(temp.txt)
+           //if(found) break;
+       }}

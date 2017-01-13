@@ -33,8 +33,14 @@ void registerPlayer(std::string name, std::string email, std::string age, std::s
 
 void writeIntoFile(struct Player *player);
 
-bool findUser(std::string email);
+bool userExists(std::string email);
 
 std::string loginPlayer(std::string username, std::string password);
+
+std::string returnUser(std::string username);
+
+int checkPointsUser(std::string username);
+
+void replaceLineInFile(std::string search_string , std::string replace_string);
 
 #endif // FUNCTIONS_H

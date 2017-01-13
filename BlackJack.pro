@@ -14,12 +14,15 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    Functions.cpp
+    Functions.cpp \
+    editprofile.cpp
 
 HEADERS  += mainwindow.h \
-    Functions.h
+    Functions.h \
+    editprofile.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    editprofile.ui
 
 #enable console
 CONFIG += console

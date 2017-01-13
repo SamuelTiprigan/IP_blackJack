@@ -1,9 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include"Functions.h"
+#include"editprofile.h"
 
-bool loginPlayer1 = false;
-bool loginPlayer2 = false;
+static int countLoggedUsers =0;
+
+
+static std::string player1;
+static std::string player2;
+
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -74,6 +79,10 @@ void MainWindow::on_pushButton_2_clicked()
 //login
 void MainWindow::on_pushButton_4_clicked()
 {
+
+    ui->lEmail->setText("samy.tiprigan@gmail.com");
+    ui->lPassword->setText("hpf101");
+
     QMessageBox msgBox;
     std::string email = ui->lEmail->text().toStdString();
     std::string pass = ui->lPassword->text().toStdString();
@@ -85,7 +94,7 @@ void MainWindow::on_pushButton_4_clicked()
     }
     else
     {
-        if(findUser(email) ==false)
+        if(userExists(email) ==false)
         {
             msgBox.setText(" User not found in the database ! \nPlease register!");
             msgBox.exec();
@@ -94,7 +103,9 @@ void MainWindow::on_pushButton_4_clicked()
         {
             std::string player11 = loginPlayer(email,pass);
             std::cout<<" User logat !" <<player11<<endl;
-            loginPlayer1=true;
+
+            countLoggedUsers++;
+            player1 = player11;
 
             msgBox.setText("Player 1 has logged in !");
             msgBox.exec();
@@ -105,3 +116,14 @@ void MainWindow::on_pushButton_4_clicked()
         }
     }
 }
+
+//edit profile user 1
+void MainWindow::on_pushButton_6_clicked()
+{
+
+    EditProfile *editProfile = new EditProfile();
+    editProfile->show();
+
+
+}
+
