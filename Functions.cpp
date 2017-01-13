@@ -282,9 +282,8 @@ void replaceLineInFile(string strReplace, string strNew)
            if(strTemp == strReplace)//if your word found then replace
            {
                strTemp = strNew;
-               //found = true;
            }
            strTemp += "\n";
            fileout << strTemp;//output everything to fileout(temp.txt)
-           //if(found) break;
+
        }}

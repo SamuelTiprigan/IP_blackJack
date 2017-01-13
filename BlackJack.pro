@@ -15,11 +15,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     Functions.cpp \
-    editprofile.cpp
+    editprofile.cpp \
+    BlackJack.cpp
 
 HEADERS  += mainwindow.h \
     Functions.h \
-    editprofile.h
+    editprofile.h \
+    BlackJack.h
 
 FORMS    += mainwindow.ui \
     editprofile.ui

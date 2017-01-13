@@ -66,7 +66,7 @@ void EditProfile::on_pushButton_10_clicked()
 
     istringstream buffer3(ui->eMoney->text().toStdString());
     int scoreValue;
-    buffer2 >> scoreValue;
+    buffer3 >> scoreValue;
 
     struct Player player1;
     player1.name = ui->eName->text().toStdString();

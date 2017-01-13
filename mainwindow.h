@@ -3,9 +3,7 @@
 
 #include <QMainWindow>
 #include "QMessageBox"
-#include"stdio.h"
-#include"string"
-#include"string.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -27,6 +25,8 @@ private slots:
     void on_pushButton_2_clicked();
     
     void on_pushButton_6_clicked();
+
+    void on_pushButton_10_clicked();
 
 private:
     Ui::MainWindow *ui;

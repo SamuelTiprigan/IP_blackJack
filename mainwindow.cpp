@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include"Functions.h"
 #include"editprofile.h"
+#include"BlackJack.h"
 
 static int countLoggedUsers =0;
 
@@ -127,3 +128,8 @@ void MainWindow::on_pushButton_6_clicked()
 
 }
 
+//play single
+void MainWindow::on_pushButton_10_clicked()
+{
+
+}
